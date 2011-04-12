@@ -1,0 +1,40 @@
+package com.example.tests;
+
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.regex.Pattern;
+
+public class Task7 extends SeleneseTestCase {
+	@Before
+	public void setUp() throws Exception {
+		WebDriver driver = new FirefoxDriver();
+		String baseUrl = "http://www.rose-hulman.edu/";
+		Selenium selenium = new WebDriverBackedSelenium(driver, baseUrl);
+		selenium.start();
+	}
+
+	@Test
+	public void testTask7() throws Exception {
+		selenium.open("/");
+		selenium.click("link=Current Students");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("css=a[title=Registrar]");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//li[6]/a/span");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("css=h2 > a");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("id1", "vitalema");
+		selenium.click("bt1");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("CSSE376"));
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		selenium.stop();
+	}
+}
